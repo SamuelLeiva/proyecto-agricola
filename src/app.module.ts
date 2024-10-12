@@ -3,9 +3,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { DatabaseModule } from './database/database.module';
 import { UserModule } from './user/user.module';
+import { AlertModule } from './alert/alert.module';
+import { WeatherModule } from './weather/weather.module';
+import { CropModule } from './crop/crop.module';
 
 @Module({
-  imports: [DatabaseModule, UserModule],
+  imports: [DatabaseModule, UserModule, AlertModule, WeatherModule, CropModule],
   controllers: [AppController],
   providers: [AppService],
 })

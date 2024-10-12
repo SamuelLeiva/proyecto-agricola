@@ -1,21 +1,19 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
-export class User {
+export class Weather {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({ unique: true })
-    username: string;
+    @Column()
+    temperature: number;
 
     @Column()
-    password: string;
+    humidity: number;
+
+    @Column()
+    precipitation: number;
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
-
-    @Column({nullable: true})
-    authStrategy: string;
-
-    
 }
