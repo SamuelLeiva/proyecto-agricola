@@ -1,15 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, ParseIntPipe } from '@nestjs/common';
 import { WeatherService } from './weather.service';
 import { CreateWeatherDto } from './dto/create-weather.dto';
 import { UpdateWeatherDto } from './dto/update-weather.dto';
+import { Weather } from './entities/weather.entity';
 
 @Controller('weather')
 export class WeatherController {
   constructor(private readonly weatherService: WeatherService) {}
 
   @Post()
-  create(@Body() createWeatherDto: CreateWeatherDto) {
-    return this.weatherService.create(createWeatherDto);
+  create(@Body() newWeather: CreateWeatherDto): Promise<Weather | HttpException> {
+    return this.weatherService.createWeather(newWeather);
   }
 
   @Get()
@@ -23,8 +24,8 @@ export class WeatherController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateWeatherDto: UpdateWeatherDto) {
-    return this.weatherService.update(+id, updateWeatherDto);
+  updateWeather(@Param('id', ParseIntPipe) id: number, @Body() weather: UpdateWeatherDto) {
+    return this.weatherService.updateWeather(id, weather);
   }
 
   @Delete(':id')
