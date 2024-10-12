@@ -1,15 +1,16 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException } from '@nestjs/common';
 import { CropService } from './crop.service';
 import { CreateCropDto } from './dto/create-crop.dto';
 import { UpdateCropDto } from './dto/update-crop.dto';
+import { Crop } from './entities/crop.entity';
 
 @Controller('crop')
 export class CropController {
   constructor(private readonly cropService: CropService) {}
 
   @Post()
-  create(@Body() createCropDto: CreateCropDto) {
-    return this.cropService.create(createCropDto);
+  createCrop(@Body() newCrop: CreateCropDto): Promise<Crop | HttpException> {
+    return this.cropService.createCrop(newCrop);
   }
 
   @Get()
