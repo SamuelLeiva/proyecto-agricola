@@ -1,1 +1,3 @@
-export class CreateAlertDto {}
+export class CreateAlertDto {
+    description:string
+}

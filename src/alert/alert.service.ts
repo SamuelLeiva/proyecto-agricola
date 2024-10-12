@@ -1,11 +1,20 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { CreateAlertDto } from './dto/create-alert.dto';
 import { UpdateAlertDto } from './dto/update-alert.dto';
+import { Repository } from 'typeorm';
+import { Alert } from './entities/alert.entity';
 
 @Injectable()
 export class AlertService {
-  create(createAlertDto: CreateAlertDto) {
-    return 'This action adds a new alert';
+
+  constructor(
+    @Inject('ALERT_REPOSITORY')
+    private alertRepository: Repository<Alert>
+  ) { }
+
+  async createAlert(alert: CreateAlertDto) {
+    const newAlert = this.alertRepository.create(alert);
+    return this.alertRepository.save(newAlert);
   }
 
   findAll() {
