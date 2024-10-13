@@ -3,13 +3,14 @@ import { CreateWeatherDto } from './dto/create-weather.dto';
 import { UpdateWeatherDto } from './dto/update-weather.dto';
 import { Repository } from 'typeorm';
 import { Weather } from './entities/weather.entity';
+import { Crop } from 'src/crop/entities/crop.entity';
 
 @Injectable()
 export class WeatherService {
 
   constructor(
     @Inject('WEATHER_REPOSITORY')
-    private weatherRepository: Repository<Weather>
+    private weatherRepository: Repository<Weather>,
   ) { }
 
   async createWeather(weather: CreateWeatherDto) {

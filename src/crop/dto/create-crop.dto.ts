@@ -4,5 +4,5 @@ export class CreateCropDto {
     size: number;
     sowingDate: Date;
     harvestDate: Date;
-    plague: boolean;
+    plague?: boolean;
 }

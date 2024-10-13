@@ -22,7 +22,7 @@ export class Crop {
     @Column()
     harvestDate: Date;
 
-    @Column()
+    @Column({default: false})
     plague: boolean;
 
     @OneToOne(()=>Weather)
