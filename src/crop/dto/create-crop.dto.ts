@@ -1,13 +1,16 @@
-import { IsNotEmpty, IsNumberString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateCropDto {
     @IsNotEmpty()
+    @IsString()
     type: string;
 
     @IsNotEmpty()
+    @IsString()
     location: string;
 
     @IsNotEmpty()
+    @IsNumber()
     size: number;
 
     @IsNotEmpty()
