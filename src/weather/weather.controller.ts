@@ -14,13 +14,14 @@ export class WeatherController {
   }
 
   @Get()
-  findAll() {
-    return this.weatherService.findAll();
+  getAllWeathers(): Promise<Weather[]> {
+    return this.weatherService.getAllWeathers();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.weatherService.findOne(+id);
+  getWeather(@Param('id', ParseIntPipe) id: number): Promise<Weather | HttpException> {
+    console.log(typeof id);
+    return this.weatherService.getWeather(id);
   }
 
   @Patch(':id')
@@ -29,7 +30,7 @@ export class WeatherController {
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.weatherService.remove(+id);
+  deleteWeather(@Param('id', ParseIntPipe) id: number) {
+    return this.weatherService.deleteWeather(id);
   }
 }

@@ -5,6 +5,7 @@ import { Repository } from 'typeorm';
 import { Crop } from './entities/crop.entity';
 import { Weather } from 'src/weather/entities/weather.entity';
 import { CreateWeatherDto } from 'src/weather/dto/create-weather.dto';
+import { UpdateWeatherDto } from 'src/weather/dto/update-weather.dto';
 
 @Injectable()
 export class CropService {
@@ -35,19 +36,44 @@ export class CropService {
     return this.cropRepository.save(cropFound);
   }
 
-  findAll() {
-    return `This action returns all crop`;
+  async getAllCrops(): Promise<Crop[]> {
+    return this.cropRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} crop`;
+  async getCrop(id: number) {
+    const cropFound = await this.cropRepository.findOne({
+      where: { id }
+    });
+
+    if (!cropFound) {
+      return new HttpException("Crop not found", HttpStatus.NOT_FOUND);
+    }
+
+    return cropFound;
   }
 
-  update(id: number, updateCropDto: UpdateCropDto) {
-    return `This action updates a #${id} crop`;
+  async updateCrop(id: number, crop: UpdateCropDto) {
+    const cropFound = await this.cropRepository.findOne({
+      where: {
+        id
+      }
+    })
+
+    if(!cropFound) {
+      return new HttpException("Crop not found", HttpStatus.NOT_FOUND);
+    }
+
+    const updatedCrop = Object.assign(cropFound, crop);
+    return this.cropRepository.save(updatedCrop);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} crop`;
+  async deleteCrop(id: number) {
+    const result = await this.cropRepository.delete({ id });
+
+    if(result.affected === 0){
+      return new HttpException("Crop not found", HttpStatus.NOT_FOUND)
+    }
+
+    return result;
   }
 }

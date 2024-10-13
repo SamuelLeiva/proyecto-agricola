@@ -14,7 +14,7 @@ export class CropController {
     return this.cropService.createCrop(newCrop);
   }
 
-  @Post(':id/weather')
+  @Post('crop/:id/weather')
   createCropWeather(
     @Param('id', ParseIntPipe) id: number,
     @Body() weather: CreateWeatherDto
@@ -23,22 +23,23 @@ export class CropController {
   }
 
   @Get()
-  findAll() {
-    return this.cropService.findAll();
+  getAllCrops(): Promise<Crop[]> {
+    return this.cropService.getAllCrops();
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.cropService.findOne(+id);
+  getCrop(@Param('id', ParseIntPipe) id: number): Promise<Crop | HttpException> {
+    console.log(typeof id);
+    return this.cropService.getCrop(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCropDto: UpdateCropDto) {
-    return this.cropService.update(+id, updateCropDto);
+  updateCrop(@Param('id', ParseIntPipe) id: number, @Body() crop: UpdateCropDto) {
+    return this.cropService.updateCrop(id, crop);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.cropService.remove(+id);
+  deleteCrop(@Param('id', ParseIntPipe) id: number) {
+    return this.cropService.deleteCrop(id);
   }
 }
