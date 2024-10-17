@@ -3,6 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
+import { Public } from 'src/auth/auth.decorators';
 
 @Controller('user')
 export class UserController {
@@ -18,9 +19,9 @@ export class UserController {
     return this.userService.getAllUsers();
   }
 
+  @Public()
   @Get(':id')
   getUser(@Param('id', ParseIntPipe) id: number): Promise<User | HttpException> {
-    console.log(typeof id);
     return this.userService.getUser(id);
   }
 

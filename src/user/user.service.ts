@@ -37,7 +37,21 @@ export class UserService {
     });
 
     if (!userFound) {
-      return new HttpException("User not found", HttpStatus.NOT_FOUND);
+      throw new HttpException("User not found", HttpStatus.NOT_FOUND);
+    }
+
+    return userFound
+  }
+
+  async getUserByUsername(username: string): Promise<User | HttpException> {
+    const userFound = await this.userRepository.findOne({
+      where: { username }
+    });
+
+    console.log(userFound)
+
+    if (!userFound) {
+      throw new HttpException("User not found", HttpStatus.NOT_FOUND);
     }
 
     return userFound
