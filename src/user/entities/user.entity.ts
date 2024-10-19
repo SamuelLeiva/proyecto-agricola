@@ -6,7 +6,7 @@ export class User {
     id: number;
 
     @Column({ unique: true })
-    username: string;
+    name: string;
 
     @Column()
     password: string;
@@ -16,9 +16,5 @@ export class User {
 
     @Column({ type: 'datetime', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
-
-    @Column({nullable: true})
-    authStrategy: string;
-
     
 }

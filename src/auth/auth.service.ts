@@ -2,8 +2,9 @@ import { HttpException, Injectable, UnauthorizedException } from '@nestjs/common
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/user/entities/user.entity';
 import { UserService } from 'src/user/user.service';
-import * as bcrypt from 'bcrypt';
 import { SignUpDto } from './dto/sign-up.dto';
+import * as bcrypt from 'bcrypt';
+import { SignInDto } from './dto/sign-in.dto';
 
 @Injectable()
 export class AuthService {
@@ -12,26 +13,27 @@ export class AuthService {
         private jwtService: JwtService
     ){}
 
-    async signIn(username: string, pass: string): Promise<{access_token: string} | HttpException> {
-        const user = await this.userService.getUserByUsername(username);
+    async signIn(signInDto: SignInDto): Promise<{access_token: string} | HttpException> {
+        const user = await this.userService.getUserByEmail(signInDto.email);
 
         if(user instanceof User){
-            if (user?.password !== pass) {
+            if (user?.password !== signInDto.password) {
                 throw new UnauthorizedException();
               }
 
-            const payload = { sub: user.id, username: user.username}
+            const payload = { sub: user.id, name: user.name}
             
             return {
                 access_token: await this.jwtService.signAsync(payload),
             }
         }
+        
         throw user;
     }
 
     async signUp(signUpDto: SignUpDto){
-        const hashedPassword = await this.encodePassword(signUpDto.password);
-        signUpDto.password = hashedPassword;
+        //const hashedPassword = await this.encodePassword(signUpDto.password);
+        //signUpDto.password = hashedPassword;
         return this.userService.createUser(signUpDto);
     }
 

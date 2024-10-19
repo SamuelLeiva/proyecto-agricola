@@ -4,7 +4,7 @@ export class SignUpDto {
     
     @IsNotEmpty()
     @IsString()
-    username: string
+    name: string
 
     @IsNotEmpty()
     @IsEmail()
