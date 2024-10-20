@@ -13,6 +13,11 @@ export class AlertController {
     return this.alertService.createAlert(newAlert);
   }
 
+  @Post(':id/crop')
+  createCropAlert(@Param('id', ParseIntPipe) id: number ,@Body() newAlert: CreateAlertDto): Promise<Alert | HttpException> {
+    return this.alertService.createCropAlert(id, newAlert);
+  }
+
   @Get()
   getAllAlerts(): Promise<Alert[]> {
     return this.alertService.getAllAlerts();

@@ -5,7 +5,6 @@ import { Repository } from 'typeorm';
 import { Crop } from './entities/crop.entity';
 import { Weather } from 'src/weather/entities/weather.entity';
 import { CreateWeatherDto } from 'src/weather/dto/create-weather.dto';
-import { UpdateWeatherDto } from 'src/weather/dto/update-weather.dto';
 
 @Injectable()
 export class CropService {

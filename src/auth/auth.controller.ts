@@ -2,7 +2,7 @@ import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common'
 import { AuthService } from './auth.service';
 import { SignInDto } from './dto/sign-in.dto';
 import { SignUpDto } from './dto/sign-up.dto';
-import { Public } from './auth.decorators';
+import { Public } from './decorators/auth.decorators';
 import { Throttle } from '@nestjs/throttler';
 
 @Throttle({ default: { limit: 20, ttl: 60000 }})

@@ -14,7 +14,7 @@ export class CropController {
     return this.cropService.createCrop(newCrop);
   }
 
-  @Post('crop/:id/weather')
+  @Post(':id/weather')
   createCropWeather(
     @Param('id', ParseIntPipe) id: number,
     @Body() weather: CreateWeatherDto

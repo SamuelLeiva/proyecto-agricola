@@ -1,5 +1,5 @@
 import { DataSource } from "typeorm";
-import { Crop } from "./crop.entity";
+import { Crop } from "../entities/crop.entity";
 
 export const cropProviders = [
     {

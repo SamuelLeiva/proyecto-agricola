@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
-import { Weather } from "./weather.entity";
+import { Weather } from "../entities/weather.entity";
+
 
 export const weatherProviders = [
     {

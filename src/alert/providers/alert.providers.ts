@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm";
-import { Alert } from "./alert.entity";
+import { Alert } from "../entities/alert.entity";
+
 
 export const alertProviders = [
     {

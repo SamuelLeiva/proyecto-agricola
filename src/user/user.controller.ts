@@ -3,7 +3,7 @@ import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-import { Public } from 'src/auth/auth.decorators';
+import { Public } from 'src/auth/decorators/auth.decorators';
 import { Throttle } from '@nestjs/throttler';
 
 @Throttle({default: { limit: 12, ttl: 60000}})

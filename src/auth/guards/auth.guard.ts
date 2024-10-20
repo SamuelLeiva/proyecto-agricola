@@ -5,10 +5,12 @@ import {
     UnauthorizedException,
   } from '@nestjs/common';
   import { JwtService } from '@nestjs/jwt';
-  import { jwtConstants } from './auth.constants';
+
   import { Request } from 'express';
 import { Reflector } from '@nestjs/core';
-import { IS_PUBLIC_KEY } from './auth.decorators';
+import { IS_PUBLIC_KEY } from '../decorators/auth.decorators';
+import { jwtConstants } from '../constants/auth.constants';
+
   
   @Injectable()
   export class AuthGuard implements CanActivate {
@@ -20,7 +22,6 @@ import { IS_PUBLIC_KEY } from './auth.decorators';
         context.getClass(),
       ]);
       if (isPublic) {
-        // 💡 See this condition
         return true;
       }
 

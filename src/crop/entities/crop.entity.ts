@@ -25,7 +25,7 @@ export class Crop {
     @Column({default: false})
     plague: boolean;
 
-    @OneToOne(()=>Weather)
+    @OneToOne(() => Weather)
     @JoinColumn()
     weather: Weather
 
